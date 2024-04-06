@@ -10,9 +10,9 @@ const getCookie =(name) => {
     if (document.cookie && document.cookie !== '') {
         const cookies = document.cookie.split(';');
         for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies [i].trim();
+            const cookie = cookies[i].trim();
             // Does this cookie string begin with the name we want? 
-            if (cookie.substring(0, name.length + 1) === (name + '=')){
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
                 cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
                 break;
             }
@@ -39,6 +39,7 @@ const likeUnlikePosts = ()=> {
             },
             success: function(response){
                 console.log(response)
+                clickedBtn.textContent = response.liked ? `Unlike (${response.count})`: `Like (${response.count})`
             },
             error: function(error){
                 console.log(error)
@@ -72,9 +73,9 @@ const getData = () => {
                                         <a href="#" class="btn btn-primary">Details</a>
                                     </div>
                                     <div class="col-2">
-                                    <form class="like-unlike-forms" data-form-id="${el.id}">
-                                        <button href="#" class="btn btn-primary" id="like-unlike-${el.id}">${el.liked ? `Unlike (${el.count})`: `Like (${el.count})`}</button>
-                                    </form>
+                                        <form class="like-unlike-forms" data-form-id="${elemnent.id}">
+                                            <button href="#" class="btn btn-primary" id="like-unlike-${element.id}">${element.liked ? `Unlike (${element.count})`: `Like (${el.count})`}</button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -82,7 +83,7 @@ const getData = () => {
                     `
                 });
                 likeUnlikePosts()
-            }, 100)
+            }, 1000)
             console.log(response.size)
             if (response.size === 0) {
                 endBox.textContent = 'No posts added yet...'
